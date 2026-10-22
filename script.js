@@ -1,40 +1,39 @@
 document.getElementById('registrationForm').addEventListener('submit', function(event) {
-        // Intercept default browser action
+        // 1. Prevent default form action
             event.preventDefault();
 
-                // Data elements selection mapping
+                // 2. Get input values from form fields
                     const password = document.getElementById('password').value;
                         const confirmPassword = document.getElementById('confirmPassword').value;
                             const email = document.getElementById('studentEmail').value;
-                                const feedbackBox = document.getElementById('formFeedback');
+                                const messageBox = document.getElementById('formMessage');
 
-                                    // Default configuration refresh
-                                        feedbackBox.className = "status-message hidden";
-                                            feedbackBox.textContent = "";
+                                    // 3. Reset message element status
+                                        messageBox.className = "message-box hidden";
+                                            messageBox.textContent = "";
 
-                                                // 1. Structural Password parity checking
+                                                // 4. Validate matching passwords
                                                     if (password !== confirmPassword) {
-                                                            feedbackBox.textContent = "Validation Failure: Creation Passwords do not match.";
-                                                                    feedbackBox.classList.remove('hidden');
-                                                                            feedbackBox.classList.add('error');
+                                                            messageBox.textContent = "Error: Passwords do not match. Please verify.";
+                                                                    messageBox.classList.remove('hidden');
+                                                                            messageBox.classList.add('error');
                                                                                     return;
                                                                                         }
 
-                                                                                            // 2. Strict University Email Domain format requirement validation
+                                                                                            // 5. Validate school student email address extension
                                                                                                 if (!email.endsWith('@student.funaab.edu.ng')) {
-                                                                                                        feedbackBox.textContent = "Access Blocked: Please use your designated university email ending with '@student.funaab.edu.ng'.";
-                                                                                                                feedbackBox.classList.remove('hidden');
-                                                                                                                        feedbackBox.classList.add('error');
+                                                                                                        messageBox.textContent = "Error: Registration requires a valid university email matching '@student.funaab.edu.ng'.";
+                                                                                                                messageBox.classList.remove('hidden');
+                                                                                                                        messageBox.classList.add('error');
                                                                                                                                 return;
                                                                                                                                     }
 
-                                                                                                                                        // 3. Execution confirmation state simulation trigger
-                                                                                                                                            feedbackBox.textContent = "Verification Successful! Your account has been initialized.";
-                                                                                                                                                feedbackBox.classList.remove('hidden');
-                                                                                                                                                    feedbackBox.classList.add('success');
+                                                                                                                                        // 6. Output successful action response
+                                                                                                                                            messageBox.textContent = "Registration successful! Account activated.";
+                                                                                                                                                messageBox.classList.remove('hidden');
+                                                                                                                                                    messageBox.classList.add('success');
 
-                                                                                                                                                        // Flush form layout values after confirmation complete
+                                                                                                                                                        // 7. Clear fields automatically
                                                                                                                                                             document.getElementById('registrationForm').reset();
                                                                                                                                                             });
-                                                                                                                                                            
-})
+
